@@ -1,0 +1,38 @@
+# Can ignore specific files
+.rvmrc
+.rvmrc.legacy
+.ruby-version
+.versions.conf
+.ruby-gemset
+.bundle
+.svn
+.project
+.svn/
+.idea/
+backups/
+db/schema.rb
+db/structure.sql
+db/development.sqlite3.master
+config/database.yml
+start
+# Use wildcards as well
+*~
+*.bkp
+*.swp
+*.swo
+*.swn
+*.tmp
+*.log
+*.sqlite3
+.DS_Store
+*.bak
+*.rdb
+hoe/
+# Can also ignore all directories and files in a directory.
+.svn/**/*
+backups/*
+dump.rdb
+hoe
+tmp
+public/system
+.idea

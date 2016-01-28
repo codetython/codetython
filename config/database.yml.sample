@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  database: codetython_development
+  host: localhost
+  username: postgres
+  password: postgres
+  encoding: utf8
+
+test:
+  adapter: postgresql
+  database: codetython_test
+  host: localhost
+  username: postgres
+  password: postgres
+  encoding: utf8
