@@ -12,6 +12,10 @@ group :development, :test do
   gem 'byebug'
   gem 'pry'
   gem 'awesome_print'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+  gem 'webmock'
 end
 
 group :development do
