@@ -42,7 +42,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
-    byebug (8.2.1)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -89,6 +88,7 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.5)
@@ -168,12 +168,12 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  byebug
   database_cleaner
   factory_girl_rails
   jbuilder (~> 2.0)
   pg
   pry
+  rack-cors
   rails (= 4.2.5)
   rspec-rails
   sdoc (~> 0.4.0)
