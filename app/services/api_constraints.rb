@@ -5,6 +5,6 @@ class ApiConstraints
   end
 
   def matches?(request)
-    @default ||= request.headers['Accept'].include?("application/vnd.marketplace.v#{@version}")
+    @default ||= request.headers['Accept'].include?("application/vnd.codetython.v#{@version}")
   end
 end
