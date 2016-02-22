@@ -1,7 +1,7 @@
 module API
   module V1
     class UsersController < ApiController
-      before_action :set_user, only: [:show]
+      before_action :set_user, only: [:show, :update]
 
       respond_to :json
 
@@ -16,6 +16,14 @@ module API
           render json: user, status: :created, location: [:api, user]
         else
           render json: { errors: user.errors }, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @user.update(user_params)
+          render json: @user, status: :ok, location: [:api, @user]
+        else
+          render json: { errors: @user.errors }, status: :unprocessable_entity
         end
       end
 
