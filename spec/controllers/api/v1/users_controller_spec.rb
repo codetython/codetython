@@ -10,7 +10,7 @@ describe API::V1::UsersController do
     end
 
     it 'returns the information about the user' do
-      user_response = JSON.parse(response.body, symbolize_names: true)
+      user_response = json_response
       expect(user_response[:email]).to eq(@user.email)
     end
 
@@ -25,7 +25,7 @@ describe API::V1::UsersController do
       end
 
       it 'renders the user json object' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response[:email]).to eq @user_attributes[:email]
       end
     end
@@ -37,12 +37,12 @@ describe API::V1::UsersController do
       end
 
       it 'renders a json errors' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response).to have_key(:errors)
       end
 
       it 'renders the json errors on why the user could not be created' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response[:errors][:email]).to include "can't be blank"
       end
 
@@ -58,7 +58,7 @@ describe API::V1::UsersController do
       end
 
       it 'renders the json object updated' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response[:email]).to eq('test@example.com')
       end
 
@@ -72,12 +72,12 @@ describe API::V1::UsersController do
       end
 
       it 'renders a json errors' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response).to have_key(:errors)
       end
 
       it 'renders the json errors on why the user could not be updated' do
-        user_response = JSON.parse(response.body, symbolize_names: true)
+        user_response = json_response
         expect(user_response[:errors][:email]).to include "is invalid"
       end
 
