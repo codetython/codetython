@@ -4,4 +4,20 @@ module Requests
       @json_response ||= JSON.parse(response.body, symbolize_names: true)
     end
   end
+
+  module HeadersHelper
+    def api_header(version = 1)
+      request.headers['Accept'] = "application/vnd.codetython.v#{version}"
+    end
+
+    def api_response_format(format = Mime::JSON)
+      request.headers['Accept'] = "#{request.headers['Accept']},#{format}"
+      request.headers['Content-Type'] = format.to_s
+    end
+
+    def include_default_headers
+      api_header
+      api_response_format
+    end
+  end
 end

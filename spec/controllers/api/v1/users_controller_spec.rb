@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 describe API::V1::UsersController do
-  before(:each) { request.headers['Accept'] = 'application/vnd.codetython.api' }
-
   describe 'GET #show' do
     before(:each) do
       @user = create(:user)
-      get :show, id: @user.id, format: :json
+      get :show, id: @user.id
     end
 
     it 'returns the information about the user' do
@@ -21,7 +19,7 @@ describe API::V1::UsersController do
     context 'when is successfully created' do
       before(:each) do
         @user_attributes = attributes_for(:user)
-        post :create, { user: @user_attributes }, format: :json
+        post :create, { user: @user_attributes }
       end
 
       it 'renders the user json object' do
@@ -33,7 +31,7 @@ describe API::V1::UsersController do
     context 'when the user is not created' do
       before(:each) do
         @invalid_attributes = { password: '12345678', password_confirmation: '12345678' }
-        post :create, { user: @invalid_attributes }, format: :json
+        post :create, { user: @invalid_attributes }
       end
 
       it 'renders a json errors' do
@@ -54,7 +52,7 @@ describe API::V1::UsersController do
     context 'when is successfully updated' do
       before(:each) do
         @user = create(:user)
-        patch :update, { id: @user.id, user: { email: "test@example.com" } }, format: :json
+        patch :update, { id: @user.id, user: { email: "test@example.com" } }
       end
 
       it 'renders the json object updated' do
@@ -68,7 +66,7 @@ describe API::V1::UsersController do
     context 'when is not updated' do
       before(:each) do
         @user = create(:user)
-        patch :update, { id: @user.id, user: { email: "testemail.com" } }, format: :json
+        patch :update, { id: @user.id, user: { email: "testemail.com" } }
       end
 
       it 'renders a json errors' do
@@ -89,7 +87,7 @@ describe API::V1::UsersController do
   describe 'DELETE #destroy' do
     before(:each) do
       @user = create(:user)
-      delete :destroy, { id: @user.id }, format: :json
+      delete :destroy, { id: @user.id }
     end
 
     it { should respond_with 204 }
