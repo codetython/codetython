@@ -36,3 +36,4 @@ hoe
 tmp
 public/system
 .idea
+.powenv
