@@ -1,6 +1,7 @@
 module API
   module V1
     class UsersController < ApiController
+      before_action :authenticate_with_token!, only: [:update, :destroy]
       before_action :set_user, only: [:show, :update, :destroy]
 
       respond_to :json
@@ -20,15 +21,15 @@ module API
       end
 
       def update
-        if @user.update(user_params)
-          render json: @user, status: :ok, location: [:api, @user]
+        if current_user.update(user_params)
+          render json: current_user, status: :ok, location: [:api, current_user]
         else
-          render json: { errors: @user.errors }, status: :unprocessable_entity
+          render json: { errors: current_user.errors }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @user.destroy
+        current_user.destroy
         head :no_content
       end
 

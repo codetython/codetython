@@ -8,8 +8,7 @@ describe API::V1::UsersController do
     end
 
     it 'returns the information about the user' do
-      user_response = json_response
-      expect(user_response[:email]).to eq(@user.email)
+      expect(json_response[:email]).to eq(@user.email)
     end
 
     it { should respond_with :success }
@@ -23,8 +22,7 @@ describe API::V1::UsersController do
       end
 
       it 'renders the user json object' do
-        user_response = json_response
-        expect(user_response[:email]).to eq @user_attributes[:email]
+        expect(json_response[:email]).to eq @user_attributes[:email]
       end
     end
 
@@ -35,13 +33,11 @@ describe API::V1::UsersController do
       end
 
       it 'renders a json errors' do
-        user_response = json_response
-        expect(user_response).to have_key(:errors)
+        expect(json_response).to have_key(:errors)
       end
 
       it 'renders the json errors on why the user could not be created' do
-        user_response = json_response
-        expect(user_response[:errors][:email]).to include "can't be blank"
+        expect(json_response[:errors][:email]).to include "can't be blank"
       end
 
       it { should respond_with :unprocessable_entity }
@@ -49,47 +45,49 @@ describe API::V1::UsersController do
   end
 
   describe 'PUT/PATCH #update' do
+    before(:each) do
+      @user = create(:user)
+      api_authorization_header @user.auth_token
+    end
+
     context 'when is successfully updated' do
       before(:each) do
-        @user = create(:user)
-        patch :update, { id: @user.id, user: { email: "test@example.com" } }
+        patch :update, { id: @user.id, user: { email: 'test@example.com' } }
       end
 
       it 'renders the json object updated' do
         user_response = json_response
-        expect(user_response[:email]).to eq('test@example.com')
+        expect(json_response[:email]).to eq('test@example.com')
       end
 
-      it { should respond_with 200 }
+      it { should respond_with :success }
     end
 
     context 'when is not updated' do
       before(:each) do
-        @user = create(:user)
         patch :update, { id: @user.id, user: { email: "testemail.com" } }
       end
 
       it 'renders a json errors' do
-        user_response = json_response
-        expect(user_response).to have_key(:errors)
+        expect(json_response).to have_key(:errors)
       end
 
       it 'renders the json errors on why the user could not be updated' do
-        user_response = json_response
-        expect(user_response[:errors][:email]).to include "is invalid"
+        expect(json_response[:errors][:email]).to include "is invalid"
       end
 
-      it { should respond_with 422 }
+      it { should respond_with :unprocessable_entity }
     end
-  
+
   end
 
   describe 'DELETE #destroy' do
     before(:each) do
       @user = create(:user)
+      api_authorization_header @user.auth_token
       delete :destroy, { id: @user.id }
     end
 
-    it { should respond_with 204 }
+    it { should respond_with :no_content }
   end
 end

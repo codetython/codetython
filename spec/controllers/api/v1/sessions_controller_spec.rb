@@ -17,7 +17,7 @@ describe API::V1::SessionsController do
         expect(json_response[:auth_token]).to eq(@user.auth_token)
       end
 
-      it { should respond_with 200 }
+      it { should respond_with :success }
     end
 
     context 'when the credentials are wrong' do
@@ -42,6 +42,6 @@ describe API::V1::SessionsController do
       delete :destroy, id: @user.auth_token
     end
 
-    it { should respond_with 204 }
+    it { should respond_with :no_content }
   end
 end
